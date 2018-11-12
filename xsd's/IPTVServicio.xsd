@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:element name="ENTER_NAME_OF_ROOT_ELEMENT_HERE">
-		<xs:annotation>
-			<xs:documentation>Comment describing your root element</xs:documentation>
-		</xs:annotation>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:tns="http://itq.edu/soa/iptvservicio" targetNamespace="http://itq.edu/soa/iptvservicio">
+	<xs:element name="servicioRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="usuario" type="tns:mail"/>
+				<xs:element name="plan" type="tns:plan"/>
+			</xs:sequence>
+		</xs:complexType>
 	</xs:element>
+	<xs:element name="subscripcionResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="subscripcion" type="xs:boolean"/>
+				<xs:element name="info" type="tns:info"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="mail">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="plan">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(BASICO)|(ESTANDAR)|(PREMIUM)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="info">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(Subscripción aprovada, disfrute el servicio)|[ ]"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
